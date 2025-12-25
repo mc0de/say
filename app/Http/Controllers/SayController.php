@@ -21,13 +21,13 @@ class SayController extends Controller
         $text = $request->input('text');
 
         $success = Awtrix::notify($text, [
-            'icon' => '25596',
+            'icon'     => '25596',
             'duration' => 15,
-            'color' => '#FFFFFF',
+            'color'    => '#FFFFFF',
         ]);
 
         if ($success) {
-            return back()->with('success', 'Message sent to Awtrix!');
+            return back()->with('success', 'Message sent');
         }
 
         return back()->with('error', 'Failed to send message to Awtrix.');

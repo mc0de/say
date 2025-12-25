@@ -8,26 +8,31 @@
 </head>
 <body class="bg-[#0d150d] text-[#EDEDEC] flex items-center justify-center min-h-screen">
     <div class="w-full max-w-4xl px-6">
-        @if(session('success'))
-            <div class="mb-6 flex items-center gap-3 px-5 py-3 bg-emerald-950 text-[#10b981] rounded-2xl backdrop-blur-sm transition-all duration-150">
-                <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-                </svg>
-                <span class="text-sm font-medium">{{ session('success') }}</span>
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="mb-6 flex items-center gap-3 px-5 py-3 bg-[#161615] border border-red-500/40 text-red-400 rounded-2xl backdrop-blur-sm transition-all duration-150">
-                <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
-                </svg>
-                <span class="text-sm font-medium">{{ session('error') }}</span>
-            </div>
-        @endif
-
         <form method="POST" action="{{ route('say.submit') }}" class="relative">
             @csrf
+
+            <!-- Success message - positioned absolutely above input -->
+            @if(session('success'))
+                <div id="success-message" class="absolute bottom-full left-0 right-0 mb-4 flex items-center justify-between gap-3 px-5 py-3 bg-emerald-950 text-[#10b981] rounded-2xl backdrop-blur-sm transition-all duration-150 opacity-100">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="text-sm font-medium">{{ session('success') }}</span>
+                    </div>
+                    <span id="countdown-timer" class="text-xs font-medium text-[#10b981]/70">5s</span>
+                </div>
+            @endif
+
+            <!-- Error message - positioned absolutely above input -->
+            @if(session('error'))
+                <div id="error-message" class="absolute bottom-full left-0 right-0 mb-4 flex items-center gap-3 px-5 py-3 bg-[#161615] border border-red-500/40 text-red-400 rounded-2xl backdrop-blur-sm transition-all duration-150 opacity-100">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-sm font-medium">{{ session('error') }}</span>
+                </div>
+            @endif
 
             <div class="relative group">
                 <!-- Spotlight input container -->
@@ -67,5 +72,48 @@
             </div>
         </form>
     </div>
+
+    <script>
+        // Auto-hide success message after 5 seconds with countdown
+        const successMessage = document.getElementById('success-message');
+        if (successMessage) {
+            const countdownTimer = document.getElementById('countdown-timer');
+            let seconds = 5;
+
+            const updateCountdown = () => {
+                seconds--;
+                if (countdownTimer) {
+                    countdownTimer.textContent = seconds + 's';
+                }
+
+                if (seconds > 0) {
+                    setTimeout(updateCountdown, 1000);
+                } else {
+                    // Fade out when countdown reaches 0
+                    successMessage.style.opacity = '0';
+                    successMessage.style.transform = 'translateY(-10px)';
+                    setTimeout(() => {
+                        successMessage.remove();
+                    }, 150);
+                }
+            };
+
+            // Start countdown after 1 second
+            // Timeline: 0s=5s, 1s=4s, 2s=3s, 3s=2s, 4s=1s, 5s=fade
+            setTimeout(updateCountdown, 1000);
+        }
+
+        // Auto-hide error message after 5 seconds
+        const errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+            setTimeout(() => {
+                errorMessage.style.opacity = '0';
+                errorMessage.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    errorMessage.remove();
+                }, 150);
+            }, 5000);
+        }
+    </script>
 </body>
 </html>
