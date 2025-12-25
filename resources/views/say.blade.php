@@ -46,7 +46,6 @@
                                 autocomplete="off"
                                 class="flex-1 bg-transparent text-[#EDEDEC] text-xl placeholder:text-[#706f6c] focus:outline-none focus:placeholder:text-[#A1A09A] transition-colors duration-150"
                                 placeholder="What's on your mind?"
-                                value="What's on your mind?"
                             />
 
                             <!-- Submit button integrated -->
