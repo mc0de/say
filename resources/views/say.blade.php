@@ -7,6 +7,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-[#0d150d] text-[#EDEDEC] flex items-center justify-center min-h-screen">
+    <!-- Confetti canvas -->
+    <canvas id="confetti-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-50" style="display: none;"></canvas>
+
     <div class="w-full max-w-4xl px-6">
         <form method="POST" action="{{ route('say.submit') }}" class="relative">
             @csrf
@@ -72,48 +75,5 @@
             </div>
         </form>
     </div>
-
-    <script>
-        // Auto-hide success message after 5 seconds with countdown
-        const successMessage = document.getElementById('success-message');
-        if (successMessage) {
-            const countdownTimer = document.getElementById('countdown-timer');
-            let seconds = 5;
-
-            const updateCountdown = () => {
-                seconds--;
-                if (countdownTimer) {
-                    countdownTimer.textContent = seconds + 's';
-                }
-
-                if (seconds > 0) {
-                    setTimeout(updateCountdown, 1000);
-                } else {
-                    // Fade out when countdown reaches 0
-                    successMessage.style.opacity = '0';
-                    successMessage.style.transform = 'translateY(-10px)';
-                    setTimeout(() => {
-                        successMessage.remove();
-                    }, 150);
-                }
-            };
-
-            // Start countdown after 1 second
-            // Timeline: 0s=5s, 1s=4s, 2s=3s, 3s=2s, 4s=1s, 5s=fade
-            setTimeout(updateCountdown, 1000);
-        }
-
-        // Auto-hide error message after 5 seconds
-        const errorMessage = document.getElementById('error-message');
-        if (errorMessage) {
-            setTimeout(() => {
-                errorMessage.style.opacity = '0';
-                errorMessage.style.transform = 'translateY(-10px)';
-                setTimeout(() => {
-                    errorMessage.remove();
-                }, 150);
-            }, 5000);
-        }
-    </script>
 </body>
 </html>
