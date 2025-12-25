@@ -14,6 +14,12 @@
             </div>
         @endif
 
+        @if(session('error'))
+            <div class="mb-6 p-4 bg-[#1a1a1a] border border-red-500/30 text-red-400 rounded-lg backdrop-blur-sm">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('say.submit') }}" class="relative">
             @csrf
 
@@ -39,7 +45,8 @@
                                 required
                                 autocomplete="off"
                                 class="flex-1 bg-transparent text-[#EDEDEC] text-xl placeholder:text-[#706f6c] focus:outline-none focus:placeholder:text-[#A1A09A] transition-colors duration-150"
-                                placeholder="Say something..."
+                                placeholder="What's on your mind?"
+                                value="What's on your mind?"
                             />
 
                             <!-- Submit button integrated -->
@@ -47,7 +54,7 @@
                                 type="submit"
                                 class="px-6 py-2.5 bg-[#10b981] hover:bg-[#059669] text-white rounded-xl font-medium transition-all duration-150 hover:scale-105 active:scale-95 shadow-lg hover:shadow-[#10b981]/50"
                             >
-                                Submit
+                                Say
                             </button>
                         </div>
                     </div>
