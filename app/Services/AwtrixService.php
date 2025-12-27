@@ -15,6 +15,13 @@ class AwtrixService
         $this->prefix = config('awtrix.prefix');
     }
 
+    public function globalTextColor(string $hex): void
+    {
+        $endpoint = '/settings';
+
+        $this->client($endpoint, ['TCOL' => $hex]);
+    }
+
     public function notify(string $text, array $options = []): bool
     {
         $endpoint = '/notify';
@@ -41,5 +48,10 @@ class AwtrixService
 
             return false;
         }
+    }
+
+    protected function client(string $endpoint, array $payload): void
+    {
+        MQTT::publish($this->prefix . $endpoint, json_encode($payload));
     }
 }
