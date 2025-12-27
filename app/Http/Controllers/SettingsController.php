@@ -23,6 +23,14 @@ class SettingsController extends Controller
 
         Awtrix::globalTextColor($color);
 
+        // Return JSON response for AJAX requests
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json([
+                'message' => "Color {$color} saved successfully!",
+                'color' => $color
+            ]);
+        }
+
         return redirect()->route('settings.index')->with('success', "Color {$color} saved successfully!");
     }
 }
