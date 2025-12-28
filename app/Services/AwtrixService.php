@@ -35,6 +35,7 @@ class AwtrixService
             'pushIcon'    => 2,
             'color'       => '#FFFFFF',
             'scrollSpeed' => 100,
+            'hold'        => true,
         ], $options);
 
         try {
