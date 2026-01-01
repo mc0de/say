@@ -67,6 +67,12 @@ return [
 
     'timezone' => 'UTC',
 
+    /**
+     * Timezone used for sunset and sunrise times
+     * in Carbon isDay isDay macroses
+     */
+    'timezone_meteo' => 'Europe/Vilnius',
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -120,7 +126,7 @@ return [
 
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
-        'store' => env('APP_MAINTENANCE_STORE', 'database'),
+        'store'  => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
 ];

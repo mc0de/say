@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Services\Meteo\Forecast;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use PhpMqtt\Client\Facades\MQTT;
@@ -50,6 +51,21 @@ class AwtrixService
             return false;
         }
     }
+
+    public function meteo(Forecast $forecast)
+    {
+        $appName  = 'meteo';
+        $endpoint = "/custom/{$appName}";
+        $payload  = [
+            'text'  => $forecast->airTemperature . '°',
+            'icon'  => '2289',
+            'color' => '#FFFFFF',
+        ];
+
+        $this->client($endpoint, $payload);
+    }
+
+    public function custom(string $appname): void {}
 
     protected function client(string $endpoint, array $payload): void
     {
