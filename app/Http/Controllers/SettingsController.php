@@ -27,7 +27,7 @@ class SettingsController extends Controller
         if ($request->expectsJson() || $request->ajax()) {
             return response()->json([
                 'message' => "Color {$color} saved successfully!",
-                'color' => $color
+                'color'   => $color,
             ]);
         }
 

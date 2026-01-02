@@ -63,28 +63,28 @@ class Forecast
         ];
     }
 
-    protected function conditionIcon(string $conditionCode)
+    protected function conditionIcon($conditionCode): string
     {
         return match ($conditionCode) {
-            'clear'                         => '',
-            'partly-cloudy'                 => '',
-            'cloudy-with-sunny-intervals'   => '',
-            'cloudy'                        => '',
-            'light-rain'                    => '',
-            'rain'                          => '',
-            'heavy-rain'                    => '',
-            'thunder'                       => '',
-            'isolated-thunderstorms'        => '',
-            'thunderstorms'                 => '',
-            'heavy-rain-with-thunderstorms' => '',
-            'light-sleet'                   => '',
-            'sleet'                         => '',
-            'freezing-rain'                 => '',
-            'hail'                          => '',
-            'light-snow'                    => '',
+            'clear'                         => $this->isDay() ? '53386' : '53383',
+            'partly-cloudy'                 => $this->isDay() ? '52173' : '12195',
+            'cloudy-with-sunny-intervals'   => '58440',
+            'cloudy'                        => '91',
+            'light-rain'                    => '2720',
+            'rain'                          => '2720',
+            'heavy-rain'                    => '49300',
+            'thunder'                       => '29839',
+            'isolated-thunderstorms'        => '49299',
+            'thunderstorms'                 => '49299',
+            'heavy-rain-with-thunderstorms' => '49299',
+            'light-sleet'                   => '49301',
+            'sleet'                         => '49301',
+            'freezing-rain'                 => '49301',
+            'hail'                          => '52158',
+            'light-snow'                    => '2289',
             'snow'                          => '2289',
-            'heavy-snow'                    => '',
-            'fog'                           => '',
+            'heavy-snow'                    => '2289',
+            'fog'                           => '52167',
             default                         => '2289',
         };
     }

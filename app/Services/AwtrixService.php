@@ -58,7 +58,7 @@ class AwtrixService
         $endpoint = "/custom/{$appName}";
         $payload  = [
             'text'  => $forecast->airTemperature . '°',
-            'icon'  => '2289',
+            'icon'  => $forecast->icon,
             'color' => '#FFFFFF',
         ];
 
