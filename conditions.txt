@@ -18,3 +18,9 @@ snow
 heavy-snow
 fog
 null
+
+{"bat":93,"bat_raw":652,"type":0,"lux":16,"ldr_raw":655,"ram":134792,"bri":11,"temp":27,"hum":30,"uptime":52169,"wifi_signal":-64,"messages":871,"version":"0.98","indicator1":false,"indicator2":false,"indicator3":false,"app":"Time","uid":"awtrix_bb5af8","matrix":true,"ip_address":"192.168.88.47"}
+
+{"bat":38,"bat_raw":543,"type":0,"lux":0,"ldr_raw":1,"ram":133572,"bri":11,"uptime":43822,"wifi_signal":-60,"messages":732,"version":"0.98","indicator1":false,"indicator2":false,"indicator3":false,"app":"Time","uid":"awtrix_bb5af8","matrix":false,"ip_address":"192.168.88.47"}
+
+last traffic: 14.80 MB
