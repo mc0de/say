@@ -68,7 +68,7 @@ class Forecast
         return match ($conditionCode) {
             'clear'                         => $this->isDay() ? '53386' : '53383',
             'partly-cloudy'                 => $this->isDay() ? '52173' : '12195',
-            'cloudy-with-sunny-intervals'   => '58440',
+            'cloudy-with-sunny-intervals'   => $this->isDay() ? '52173' : '12195',
             'cloudy'                        => '91',
             'light-rain'                    => '2720',
             'rain'                          => '2720',
